@@ -1,27 +1,13 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { Navbar } from '../components/navbar/navbar';
 import css from '../styles/Home.module.css';
 
 export default function Home() {
   return (
     <div className={css.container}>
       <header className={css.header}>
-        <nav className={css.navbar}>
-          <div className={css.navDiv}>
-            <a className={css.navbarBrand}>
-              <img src='logo.svg' alt='logo' />
-            </a>
-            <div className={[css.navItems, css.test].join(' ')}>
-              <ul className={css.navList}>
-                <li className={css.navListItem}>
-                  <a className={css.navLink} href=''>
-                    تماس با ما
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+        <Navbar />
       </header>
       <Head>
         <title>Create Next App</title>
