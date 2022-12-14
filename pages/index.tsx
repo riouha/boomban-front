@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Navbar } from '../components/navbar/navbar';
+import { PostRow } from '../components/post/post-row';
 import css from '../styles/Home.module.css';
 
 export default function Home() {
@@ -15,6 +16,12 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
+      <div className='content'>
+        <div className='post'>
+          <PostRow />
+        </div>
+        <div className='side'></div>
+      </div>
       <main className={css.main}>
         <h1 className={css.title}>
           Welcome to <a href='https://nextjs.org'>Next.js!</a>
@@ -64,6 +71,24 @@ export default function Home() {
           </span>
         </a>
       </footer>
+      <style jsx>
+        {`
+          .content {
+            margin: 20px auto;
+            display: flex;
+            width: 60vw;
+          }
+
+          .post {
+            flex: 12;
+          }
+
+          .side {
+            flex: 5;
+            background: #aaa;
+          }
+        `}
+      </style>
     </div>
   );
 }
