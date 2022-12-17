@@ -7,6 +7,7 @@ export default function Home() {
     <>
       <Header />
       <Navbar />
+
       <div className='container'>
         <div className='content'>
           <div className='post'>
