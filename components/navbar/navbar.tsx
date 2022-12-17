@@ -29,10 +29,10 @@ export function Navbar() {
       <div className={css.navItems}>
         <ul className={css.navList}>
           <li className={css.navListItem}>
-            <span className={[css.navLink].join(' ')}>صفحه اصلی </span>
+            <span className={[css.navLink, css.active].join(' ')}>صفحه اصلی </span>
           </li>
           <li className={css.navListItem}>
-            <span className={[css.navLink, css.active].join(' ')}>تماس با ما</span>
+            <span className={[css.navLink].join(' ')}>تماس با ما</span>
           </li>
           <li className={css.navListItem}>
             <span className={[css.navLink].join(' ')}>درباره ما</span>
