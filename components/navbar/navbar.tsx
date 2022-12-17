@@ -26,9 +26,6 @@ export function Navbar() {
   };
   return (
     <nav className={getNavClasses()}>
-      <a className={css.navbarBrand}>
-        <img src='logo.svg' alt='logo' />
-      </a>
       <div className={css.navItems}>
         <ul className={css.navList}>
           <li className={css.navListItem}>
@@ -45,11 +42,13 @@ export function Navbar() {
           </li>
         </ul>
       </div>
-      <SearchBox />
-      <div style={{ width: '15px' }}></div>
-      <button className={css.icon_btn}>
-        <FaBars color='#FFF' />
-      </button>
+      <div className={css.navBtns}>
+        <SearchBox />
+        <button className={css.icon_btn}>
+          <FaBars color='#FFF' />
+        </button>
+      </div>
+
       <style jsx>{`
         .fixnavbar {
         }

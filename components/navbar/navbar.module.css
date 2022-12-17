@@ -1,8 +1,8 @@
 .navbar {
-    padding: 0 10px;
+    padding: 0 20vw;
+    display: flex;
     flex-wrap: nowrap;
     justify-content: stretch;
-    display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
@@ -14,18 +14,7 @@
 }
 
 
-@media only screen and (max-width: 600px) {
-    .fixnavbar {
-
-        width: 100%;
-        z-index: 10;
-        position: fixed;
-        top: 0;
-        transition: top 0.2s ease-in-out;
-        /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1); */
-        border-bottom: 1px solid #EBEBEB;
-    }
-}
+@media only screen and (max-width: 600px) {}
 
 
 
@@ -37,7 +26,6 @@
 }
 
 .navList {
-    margin-right: 50px;
     flex-direction: row;
     display: flex;
     padding-right: 0;
@@ -101,4 +89,8 @@
 
 .icon_btn:hover {
     background-position: bottom center;
+}
+
+.navBtns button {
+    margin-right: 10px;
 }
