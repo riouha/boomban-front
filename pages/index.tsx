@@ -8,7 +8,7 @@ export default function Home() {
       <Header />
       <Navbar />
 
-      <div className='container'>
+      <div className='home_container'>
         <div className='content'>
           <div className='post'>
             <PostRow />
@@ -210,11 +210,11 @@ export default function Home() {
       </div>
       <style jsx>
         {`
-          .container {
+          .home_container {
             padding: 0 20vw;
           }
           @media only screen and (max-width: 1200px) {
-            .container {
+            .home_container {
               padding: 0 3vw;
             }
           }
@@ -225,11 +225,13 @@ export default function Home() {
           }
 
           .post {
-            flex: 12;
+            // flex: 12;
+            // width: 100%
           }
 
           .side {
-            flex: 5;
+            // flex: 5;
+            width: 45%;
             background: #aaa;
           }
 
