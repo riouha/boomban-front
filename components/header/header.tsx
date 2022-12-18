@@ -1,5 +1,5 @@
 import css from './header.module.css';
-import { FaInstagram } from 'react-icons/fa';
+import { FaBars, FaInstagram, FaSearch } from 'react-icons/fa';
 
 export function Header() {
   return (
@@ -7,7 +7,15 @@ export function Header() {
       <a className={css.brand}>
         <img src='logo.svg' alt='logo' />
       </a>
-      <FaInstagram />
+      <div className={css.mobile}>
+        <button className={css.icon_btn}>
+          <FaSearch color='#FFF' />
+        </button>
+        <button className={css.icon_btn} style={{ marginRight: '5px' }}>
+          <FaBars color='#FFF' />
+        </button>
+      </div>
+      <FaInstagram className={css.desktop} />
     </header>
   );
 }
