@@ -6,7 +6,7 @@ export function SearchBox() {
     <>
       <div className={css.box}>
         <input type='text' placeholder='جستجو کنید...' className={css.input} />
-        <button className={css.btn}>
+        <button className='appbtn'>
           <FaSearch color='#FFF' />
         </button>
       </div>

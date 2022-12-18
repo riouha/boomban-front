@@ -8,10 +8,10 @@ export function Header() {
         <img src='logo.svg' alt='logo' />
       </a>
       <div className={css.mobile}>
-        <button className={css.icon_btn}>
+        <button className='appbtn'>
           <FaSearch color='#FFF' />
         </button>
-        <button className={css.icon_btn} style={{ marginRight: '5px' }}>
+        <button className='appbtn' style={{ marginRight: '5px' }}>
           <FaBars color='#FFF' />
         </button>
       </div>

@@ -1,8 +1,8 @@
 import { Header } from '../components/header/header';
 import { Navbar } from '../components/navbar/navbar';
 import { PostRow } from '../components/posts/row-post/post-row';
-import bg from '../public/images/featured-lg.jpg';
 import { LargeOverlayedPost } from '../components/posts/large-overlayed/large-overlayed-post';
+import { BoombanCard } from '../components/boomban-card/boomban-card';
 
 export default function Home() {
   return (
@@ -21,7 +21,9 @@ export default function Home() {
               author='نام نویسنده'
             />
           </div>
-          <div className='favourite_posts'></div>
+          <div className='favourite_posts'>
+            <BoombanCard />
+          </div>
         </div>
 
         <div className='content'>
@@ -53,14 +55,18 @@ export default function Home() {
           .hot_post {
             flex: 12;
             position: relative;
+            padding-left: 1rem;
           }
           .favourite_posts {
             flex: 5;
           }
 
-          @media only screen and (max-width: 1200px) {
+          @media only screen and (max-width: 600px) {
             .favourite_posts {
               display: none;
+            }
+            .hot_post {
+              padding-left: 0;
             }
           }
 

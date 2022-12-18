@@ -11,23 +11,30 @@
   font-display: swap;
 }
 
+* {
+  box-sizing: border-box;
+  font-family: Vazirmatn, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+/* html {
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 11px;
+
+  }
+} */
+
 html,
 body {
   direction: rtl;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
 
 @media (prefers-color-scheme: dark) {
   html {
