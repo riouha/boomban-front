@@ -4,19 +4,22 @@ import { PostRow } from '../components/posts/row-post/post-row';
 import { LargeOverlayedPost } from '../components/posts/large-overlayed/large-overlayed-post';
 import { BoombanCard } from '../components/boomban-card/boomban-card';
 import { CategorySidebar } from '../components/categories/category-sidebar';
+import { SideNavbar } from '../components/navbar/side-navbar/side-navbar';
+import { useState } from 'react';
 
 export default function Home() {
+  const [showSideMenu, SetShowSideMenu] = useState(false);
   return (
     <>
-      <Header />
+      <Header handleOpenSideMenu={SetShowSideMenu} />
       <Navbar />
-
+      <SideNavbar show={showSideMenu} setShow={SetShowSideMenu} />
       <div className='home_container'>
         <div className='hot_favourites'>
           <div className='hot_post'>
             <LargeOverlayedPost
               post={{
-                title: 'درخواست کارشناسی حضوری قیمت‌ گذاری رایگان جدیدترین پیش بینی قیمت مسکن در سال جدید',
+                title: 'جدیدترین پیش بینی قیمت مسکن در سال جدید',
                 image: 'https://katen.ny3.ir/rtl/images/posts/featured-lg.jpg',
                 category: 'الهام بخش',
                 date: '27/9/1401',

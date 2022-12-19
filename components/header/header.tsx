@@ -1,7 +1,7 @@
 import css from './header.module.css';
 import { FaBars, FaInstagram, FaSearch } from 'react-icons/fa';
 
-export function Header() {
+export function Header(props: { handleOpenSideMenu: (show: boolean) => void }) {
   return (
     <header className={css.header}>
       <div className={css.brand}>
@@ -12,7 +12,7 @@ export function Header() {
         <button className='appbtn'>
           <FaSearch color='#FFF' />
         </button>
-        <button className='appbtn' style={{ marginRight: '5px' }}>
+        <button className='appbtn' style={{ marginRight: '5px' }} onClick={() => props.handleOpenSideMenu(true)}>
           <FaBars color='#FFF' />
         </button>
       </div>
