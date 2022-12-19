@@ -4,9 +4,10 @@ import { FaBars, FaInstagram, FaSearch } from 'react-icons/fa';
 export function Header() {
   return (
     <header className={css.header}>
-      <a className={css.brand}>
-        <img src='logo.svg' alt='logo' />
-      </a>
+      <div className={css.brand}>
+        <img src='images/logo.png' alt='logo' width={50} />
+        <span>بوم‌بان</span>
+      </div>
       <div className={css.mobile}>
         <button className='appbtn'>
           <FaSearch color='#FFF' />

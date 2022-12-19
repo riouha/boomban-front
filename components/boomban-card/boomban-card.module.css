@@ -28,3 +28,13 @@
   list-style: none;
   padding: 0 20px 6px 0;
 }
+
+.list li::before {
+  content: "\2713";
+  color: #FE4F70;
+  font-family: "simple-line-icons";
+  font-weight: 800;
+  font-size: 17px;
+  vertical-align: middle;
+  margin-left: 10px;
+}

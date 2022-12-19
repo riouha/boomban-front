@@ -1,25 +1,26 @@
 import { BsShare } from 'react-icons/bs';
 import { BsThreeDots } from 'react-icons/bs';
 import css from './post-row.module.css';
+import { IPost } from '../interfaces';
 
-export function PostRow() {
+export function PostRow(props: { post: IPost; style?: React.CSSProperties }) {
   return (
-    <div className={css.block}>
+    <div className={css.block} style={props.style}>
       <div className={css.post}>
         <div className={css.picture}>
-          <img src='images/latest-sm-1.jpg' alt='' />
+          <img src={props.post.image} alt='' />
         </div>
         <div className={css.info}>
           <ul className={css.info_top_list}>
             <li>
               <img src='images/woman.png' alt='author' className={css.author} />
-              <span>نویسنده مطلب</span>
+              <span>{props.post.author}</span>
             </li>
-            <li>پرطرفدار</li>
-            <li>30 اردیبهشت 1401</li>
+            <li>{props.post.category}</li>
+            <li>{props.post.date}</li>
           </ul>
-          <h3>60 کاری که باید فوراً در مورد ساختمان انجام دهید</h3>
-          <p>آرامشی شگفت انگیز تمام روحم را گرفته است، مثل این صبح های شیرین در کنار دوستان</p>
+          <h3>{props.post.title}</h3>
+          <p>{props.post.content ?? ''}</p>
           <div className={css.operations}>
             <BsShare color='#8f9bad' />
             <BsThreeDots color='#8f9bad' size='20px' />

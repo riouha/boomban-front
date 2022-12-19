@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-between;
   border-bottom: solid 1px #EBEBEB;
+  align-items: center;
+
 }
 
 
@@ -27,4 +29,15 @@
   .desktop {
     display: none;
   }
+}
+
+.brand {
+  display: inline-flex;
+}
+
+.brand span {
+  color: #203656;
+  font-weight: 800;
+  margin-right: 15px;
+  margin-top: 10px;
 }
