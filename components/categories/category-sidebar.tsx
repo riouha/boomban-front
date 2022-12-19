@@ -8,8 +8,6 @@ export interface ICategory {
 }
 
 export function CategorySidebar(props: { categories: ICategory[] }) {
-  console.log(props.categories);
-
   return (
     <div className={css.card}>
       <h3>کاوش موضوعات</h3>

@@ -3,7 +3,7 @@ import css from './navbar.module.css';
 import { FaBars } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
-export function Navbar() {
+export function Navbar(props: { handleOpenSideMenu: (show: boolean) => void }) {
   const [fix, setFix] = useState(false);
 
   const handleScroll = () => {
@@ -44,7 +44,7 @@ export function Navbar() {
       </div>
       <div className={css.navBtns}>
         <SearchBox />
-        <button className={css.icon_btn}>
+        <button className={css.icon_btn} onClick={() => props.handleOpenSideMenu(true)}>
           <FaBars color='#FFF' />
         </button>
       </div>

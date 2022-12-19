@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Header handleOpenSideMenu={SetShowSideMenu} />
-      <Navbar />
+      <Navbar handleOpenSideMenu={SetShowSideMenu} />
       <SideNavbar show={showSideMenu} setShow={SetShowSideMenu} />
       <div className='home_container'>
         <div className='hot_favourites'>
