@@ -139,7 +139,7 @@ export default function Home() {
             // background: #aaa;
           }
 
-          @media only screen and (max-width: 1200px) {
+          @media only screen and (max-width: 1400px) {
             .home_container {
               padding: 0 3vw;
             }
