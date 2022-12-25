@@ -12,7 +12,15 @@ export function Header(props: { handleOpenSideMenu: (show: boolean) => void }) {
         <button className='appbtn'>
           <FaSearch color='#FFF' />
         </button>
-        <button className='appbtn' style={{ marginRight: '5px' }} onClick={() => props.handleOpenSideMenu(true)}>
+        <button
+          className='appbtn'
+          style={{ marginRight: '5px' }}
+          onClick={() => {
+            console.log('test');
+
+            props.handleOpenSideMenu(true);
+          }}
+        >
           <FaBars color='#FFF' />
         </button>
       </div>
