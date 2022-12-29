@@ -6,13 +6,85 @@ import { BoombanCard } from '../components/boomban-card/boomban-card';
 import { CategorySidebar } from '../components/categories/category-sidebar';
 import { SideNavbar } from '../components/navbar/side-navbar/side-navbar';
 import { useState } from 'react';
+import { SidePost } from '../components/posts/side-post/side-post';
+import { MiddleBanner } from '../components/middle-banner/middle-banner';
+
+const NEWS = [
+  {
+    id: 1,
+    date: '1401/10/10',
+    title: 'چرا دلالان مسکن برنده بازارها شدند؟',
+    author: 'فردای اقتصاد',
+    image: 'https://media.fardayeeghtesad.com/d/2022/12/04/4/10670.jpg',
+  },
+  {
+    id: 2,
+    date: '1401/10/10',
+    title: 'معاملات مسکن داغ‌تر می‌شود؟',
+    author: 'فردای اقتصاد',
+    image: 'https://media.fardayeeghtesad.com/d/2022/12/21/4/11882.jpg',
+  },
+  {
+    id: 3,
+    date: '1401/10/10',
+    title: 'سرنوشت ناامیدکننده مسکن ملی',
+    author: 'فردای اقتصاد',
+    image: 'https://media.fardayeeghtesad.com/d/2022/11/05/4/8436.jpg',
+  },
+  {
+    id: 4,
+    date: '1401/10/10',
+    title: 'در چه شرایطی مالکان خانه مسکونی از پرداخت مالیات معاف می شوند؟',
+    author: 'اقتصاد انلاین',
+    image:
+      'https://static3.eghtesadonline.com/thumbnail/BDdiU9gbKj0s/XNE-VVgRri1eRAk6IJ6Mza55scbpkrmAkjGBs_do02Xvt6CP8LgvBUk7bhAwqB4R1ua0tqkDH_rTYT42RrYhphbJ9Q2XvX6L/%D8%AF%D8%B1+%DA%86%D9%87+%D8%B4%D8%B1%D8%A7%DB%8C%D8%B7%DB%8C+%D9%85%D8%A7%D9%84%DA%A9%D8%A7%D9%86+%D8%AE%D8%A7%D9%86%D9%87+%D9%85%D8%B3%DA%A9%D9%88%D9%86%DB%8C+%D8%A7%D8%B2+%D9%BE%D8%B1%D8%AF%D8%A7%D8%AE%D8%AA+%D9%85%D8%A7%D9%84%DB%8C%D8%A7%D8%AA+%D9%85%D8%B9%D8%A7%D9%81+%D9%85%DB%8C+%D8%B4%D9%88%D9%86%D8%AF%D8%9F.jpg',
+  },
+  {
+    id: 5,
+    date: '1401/10/10',
+    title: '۵۰ درصد از خانوارهای ایرانی خودرو ندارند / کدام مالکان خودرو معاف از مالیات می‌شوند؟',
+    author: 'دنیای اقتصاد',
+    image:
+      'https://static3.donya-e-eqtesad.com/thumbnail/Vlkq3m6sXTWE/QHn8O9nsSzT8qCU7RegsN6Pbb5v74eEtbKeSOh05RaYla9wWYBYrfEt7TZyzEhnm/%D8%A2%D9%84%D9%88%D8%AF%DA%AF%DB%8C+%D8%A8%D9%87+%D8%A2%D8%B3%D9%85%D8%A7%D9%86+%D8%AA%D9%87%D8%B1%D8%A7%D9%86+%D8%A8%D8%A7%D8%B2%DA%AF%D8%B4%D8%AA+copy.jpg',
+  },
+  {
+    id: 6,
+    date: '1401/10/10',
+    title: 'بیت کوین یک سرمایه گذاری خوب است/ سرمایه گذاران طلا احمق هستند!',
+    author: 'ملکانا',
+    image: 'https://www.melkana.com/blog/wp-content/uploads/2022/12/6642-150x150.jpg',
+  },
+  {
+    id: 7,
+    date: '1401/10/10',
+    title: 'عطش سیری ناپذیر وام بانکی در ایران / چرا افزایش نرخ سود بانکی تورم را خیلی کم نمی کند؟',
+    author: 'اقتصاد نیوز',
+    image:
+      'https://static4.eghtesadnews.com/thumbnail/msKL78TZh1EV/HNXPOu-gYQgnB2fMDkK7mke0S39fxhogKjffI2V27aS9oGCdDQCFyXxRyX647MzQwGcBsTrR56ozVVP8dMbHmum7ioSbEEkx85GlR9oCoZ3DaRzXwcxoLg,,/youlLa3Li32T.jpg',
+  },
+  {
+    id: 8,
+    date: '1401/10/10',
+    title: 'آخرین وضعیت قیمت اوراق مسکن / هزینه وام مسکن چقدر شد؟',
+    author: 'اکوایران',
+    image:
+      'https://static3.ecoiran.com/thumbnail/L5pADqW6FpMe/oZRmDytQCqPbx64THpRbAF899BMitgIDSfP66penUZ6m9xMsVHbWjBoW4bIRHlTclq6Z_b1l_bR3FJ_vqz--jOehnuZmMO0s_4ngQ9jVKYg,/%D9%81%D8%B1%D9%88%D8%B1%DB%8C%D8%B2%D8%B4.jpg',
+  },
+  {
+    id: 9,
+    date: '1401/10/10',
+    title: 'درآمد شهرداری تهران از عوارض قطع درختان چقدر است؟',
+    author: 'دارایان',
+    image: 'https://www.daraian.com/fa/media/k2/items/cache/1c7c8641d8b115b778eeda8c8002b8a9_L.jpg',
+  },
+];
 
 export default function Home() {
   const [showSideMenu, SetShowSideMenu] = useState(false);
   return (
     <>
       <Header handleOpenSideMenu={SetShowSideMenu} />
-      <Navbar handleOpenSideMenu={SetShowSideMenu} />
+      {/* <Navbar handleOpenSideMenu={SetShowSideMenu} /> */}
       <SideNavbar show={showSideMenu} setShow={SetShowSideMenu} />
       <div className='home_container'>
         <div className='hot_favourites'>
@@ -31,6 +103,8 @@ export default function Home() {
             <BoombanCard />
           </div>
         </div>
+
+        <MiddleBanner />
 
         <div className='sublayout'>
           <div className='post'>
@@ -85,6 +159,14 @@ export default function Home() {
           </div>
 
           <div className='side'>
+            <div className='lastnews'>
+              <h3>آخرین خبرها</h3>
+              {NEWS.map((x) => (
+                <SidePost key={x.id} post={x as any} />
+              ))}
+            </div>
+            <br />
+            <br />
             <CategorySidebar
               categories={[
                 { id: 1, name: 'بررسی ساختمان', postsCount: 5 },
@@ -102,6 +184,17 @@ export default function Home() {
       </div>
       <style jsx>
         {`
+          .lastnews {
+            border: 1px solid #ebebeb;
+            border-radius: 10px;
+            padding: 0 15px;
+          }
+
+          .lastnews h3 {
+            color: #203656;
+            text-align: center;
+          }
+
           .hot_favourites {
             margin: 3vh 0;
             display: flex;

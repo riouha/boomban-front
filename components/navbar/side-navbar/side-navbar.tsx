@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import { BsXLg } from 'react-icons/bs';
+import { Backdrop } from '../../backdrop/backdrop';
 
 export function SideNavbar(props: { show: boolean; setShow: (show: boolean) => void }) {
   return (
     <>
+      <Backdrop show={props.show} setShow={props.setShow} />
       <div className='sidenav' style={{ width: props.show ? '80%' : '0' }}>
         <div className='inner'>
           <span className='closebtn'>
@@ -29,7 +30,7 @@ export function SideNavbar(props: { show: boolean; setShow: (show: boolean) => v
           width: 0;
           max-width: 250px;
           position: fixed;
-          z-index: 11;
+          z-index: 20;
           top: 0;
           right: 0;
           background-image: linear-gradient(to right, #fff, #fff);

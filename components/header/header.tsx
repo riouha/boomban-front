@@ -1,30 +1,64 @@
 import css from './header.module.css';
 import { FaBars, FaInstagram, FaSearch } from 'react-icons/fa';
+import { SearchBox } from '../serach-box/search-box';
+import { useEffect, useState } from 'react';
 
 export function Header(props: { handleOpenSideMenu: (show: boolean) => void }) {
+  const [fix, setFix] = useState(false);
+
+  const handleScroll = () => {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY > 200) setFix(true);
+      else setFix(false);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
+
+  const getHeaderClasses = () => {
+    if (fix) return [css.header, css.fixheader].join(' ');
+    return css.header;
+  };
+
   return (
-    <header className={css.header}>
+    <header className={getHeaderClasses()}>
       <div className={css.brand}>
         <img src='images/logo.png' alt='logo' width={50} />
         <span>بوم‌بان</span>
       </div>
-      <div className={css.mobile}>
-        <button className='appbtn'>
+      <nav className={css.desktop}>
+        <div className={css.navItems}>
+          <ul className={css.navList}>
+            <li className={css.navListItem}>
+              <span className={[css.navLink, css.active].join(' ')}>صفحه اصلی </span>
+            </li>
+            <li className={css.navListItem}>
+              <span className={[css.navLink].join(' ')}>تماس با ما</span>
+            </li>
+            <li className={css.navListItem}>
+              <span className={[css.navLink].join(' ')}>درباره ما</span>
+            </li>
+            <li className={css.navListItem}>
+              <span className={[css.navLink].join(' ')}>بلاگ</span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div className={css.navBtns}>
+        <SearchBox className={css.desktop} />
+        <button className={[css.icon_btn, css.mobile].join(' ')}>
           <FaSearch color='#FFF' />
         </button>
-        <button
-          className='appbtn'
-          style={{ marginRight: '5px' }}
-          onClick={() => {
-            console.log('test');
-
-            props.handleOpenSideMenu(true);
-          }}
-        >
+        <button className={css.icon_btn} onClick={() => props.handleOpenSideMenu(true)}>
           <FaBars color='#FFF' />
         </button>
       </div>
-      <FaInstagram className={css.desktop} />
     </header>
   );
 }
