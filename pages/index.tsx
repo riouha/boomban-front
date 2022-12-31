@@ -1,5 +1,4 @@
 import { Header } from '../components/header/header';
-import { Navbar } from '../components/navbar/navbar';
 import { PostRow } from '../components/posts/row-post/post-row';
 import { LargeOverlayedPost } from '../components/posts/large-overlayed/large-overlayed-post';
 import { BoombanCard } from '../components/boomban-card/boomban-card';
@@ -121,7 +120,7 @@ export default function Home() {
                 key={post.id}
                 post={{
                   title: post.title,
-                  content: '',
+                  content: post.content ?? '',
                   category: 'مسکن',
                   date: post.publishDate
                     ? new Intl.DateTimeFormat('fa-IR').format(new Date(post.publishDate))

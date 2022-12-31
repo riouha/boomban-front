@@ -1,7 +1,6 @@
-import { BsShare } from 'react-icons/bs';
-import { BsThreeDots } from 'react-icons/bs';
-import css from './post-row.module.css';
+import { BsShare, BsThreeDots } from 'react-icons/bs';
 import { IPost } from '../interfaces';
+import css from './post-row.module.css';
 
 export function PostRow(props: { post: IPost; style?: React.CSSProperties }) {
   return (
