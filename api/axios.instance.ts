@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-export const BaseURL = process.env.NODE_ENV === 'production' ? 'https://boomban.ir/api' : 'http://localhost:4000';
+console.log(process.env.NODE_ENV);
+
+export const BaseURL = process.env.NODE_ENV === 'production' ? 'http://87.248.156.231:3400' : 'http://localhost:3400';
 export const axiosInstance = axios.create({
   baseURL: BaseURL,
   headers: {},

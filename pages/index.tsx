@@ -5,9 +5,11 @@ import { LargeOverlayedPost } from '../components/posts/large-overlayed/large-ov
 import { BoombanCard } from '../components/boomban-card/boomban-card';
 import { CategorySidebar } from '../components/categories/category-sidebar';
 import { SideNavbar } from '../components/navbar/side-navbar/side-navbar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SidePost } from '../components/posts/side-post/side-post';
 import { MiddleBanner } from '../components/middle-banner/middle-banner';
+import { Post } from '../services/post/post.model';
+import { postService } from '../services/post/post.service';
 
 const NEWS = [
   {
@@ -81,6 +83,12 @@ const NEWS = [
 
 export default function Home() {
   const [showSideMenu, SetShowSideMenu] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    postService.getPosts().then((data) => setPosts(data.data?.posts ?? []));
+  }, []);
+
   return (
     <>
       <Header handleOpenSideMenu={SetShowSideMenu} />
@@ -108,54 +116,22 @@ export default function Home() {
 
         <div className='sublayout'>
           <div className='post'>
-            <PostRow
-              post={{
-                title: '60 کاری که باید فوراً در مورد ساختمان انجام دهید',
-                content:
-                  'بازار مسکن یکی از پرطرفدارترین بازارهای سرمایه است که هر ساله خریداران و سرمایه گذاران زیادی وارد آن می‌شوند',
-                category: 'پرطرفدار',
-                date: new Intl.DateTimeFormat('fa-IR').format(Date.now()),
-                author: 'نام نویسنده',
-                image: 'https://katen.ny3.ir/rtl/images/posts/latest-sm-1.jpg',
-              }}
-              style={{ marginBottom: '30px' }}
-            />
-            <PostRow
-              post={{
-                title: '60 کاری که باید فوراً در مورد ساختمان انجام دهید',
-                content:
-                  'بازار مسکن یکی از پرطرفدارترین بازارهای سرمایه است که هر ساله خریداران و سرمایه گذاران زیادی وارد آن می‌شوند',
-                category: 'پرطرفدار',
-                date: new Intl.DateTimeFormat('fa-IR').format(Date.now()),
-                author: 'نام نویسنده',
-                image: 'https://katen.ny3.ir/rtl/images/posts/latest-sm-1.jpg',
-              }}
-              style={{ marginBottom: '30px' }}
-            />
-            <PostRow
-              post={{
-                title: '60 کاری که باید فوراً در مورد ساختمان انجام دهید',
-                content:
-                  'بازار مسکن یکی از پرطرفدارترین بازارهای سرمایه است که هر ساله خریداران و سرمایه گذاران زیادی وارد آن می‌شوند',
-                category: 'پرطرفدار',
-                date: new Intl.DateTimeFormat('fa-IR').format(Date.now()),
-                author: 'نام نویسنده',
-                image: 'https://katen.ny3.ir/rtl/images/posts/latest-sm-1.jpg',
-              }}
-              style={{ marginBottom: '30px' }}
-            />
-            <PostRow
-              post={{
-                title: '60 کاری که باید فوراً در مورد ساختمان انجام دهید',
-                content:
-                  'بازار مسکن یکی از پرطرفدارترین بازارهای سرمایه است که هر ساله خریداران و سرمایه گذاران زیادی وارد آن می‌شوند',
-                category: 'پرطرفدار',
-                date: new Intl.DateTimeFormat('fa-IR').format(Date.now()),
-                author: 'نام نویسنده',
-                image: 'https://katen.ny3.ir/rtl/images/posts/latest-sm-1.jpg',
-              }}
-              style={{ marginBottom: '30px' }}
-            />
+            {posts.map((post) => (
+              <PostRow
+                key={post.id}
+                post={{
+                  title: post.title,
+                  content: '',
+                  category: 'مسکن',
+                  date: post.publishDate
+                    ? new Intl.DateTimeFormat('fa-IR').format(new Date(post.publishDate))
+                    : post.createDate,
+                  author: post.source ?? '',
+                  image: post.thumbnail,
+                }}
+                style={{ marginBottom: '30px' }}
+              />
+            ))}
           </div>
 
           <div className='side'>

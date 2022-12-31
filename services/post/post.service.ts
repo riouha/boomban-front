@@ -5,7 +5,20 @@ import { Post, CreatePostData } from './post.model';
 import { IPostService } from './post.service.interface';
 import { SearchResult } from '../../utils/types/search-result.type';
 
-export class PostService implements IPostService {
+class PostService implements IPostService {
+  async getPosts(): Promise<IApiResponse<{ posts: Post[] }>> {
+    try {
+      const result = await axiosInstance.get('/post');
+      return {
+        data: { posts: result.data },
+      };
+    } catch (err: any) {
+      return {
+        error: err.response ? err.response.status : 500,
+        message: err.message,
+      };
+    }
+  }
   async searchPosts(filters: SearchFilters): Promise<IApiResponse<SearchResult<{ posts: Post[] }>>> {
     try {
       const result = await axiosInstance.get('/post');
@@ -48,3 +61,5 @@ export class PostService implements IPostService {
     }
   }
 }
+
+export const postService = new PostService();
