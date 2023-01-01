@@ -1,20 +1,25 @@
 import css from './styles.module.css';
 import { IPost } from '../interfaces';
+import Link from 'next/link';
 
 export function LargeOverlayedPost(props: { post: IPost }) {
   return (
     <div className={css.large_overlayed_post}>
       <div className={css.details}>
         <span>{props.post.category}</span>
-        <h2 className={css.title}>{props.post.title}</h2>
+        <Link href={props.post.link || `/post/${props.post.slug}`} target={props.post.link ? '_blank' : undefined}>
+          <h2 className={css.title}>{props.post.title}</h2>
+        </Link>
         <ul className={css.meta}>
-          <li>{props.post.author}</li>
+          <li>{props.post.author.title}</li>
           <li>{props.post.date}</li>
         </ul>
       </div>
-      <div className={css.image_div}>
-        <div className={css.inner_img} style={{ backgroundImage: `url(${props.post.image})` }}></div>
-      </div>
+      <Link href={props.post.link || `/post/${props.post.slug}`} target={props.post.link ? '_blank' : undefined}>
+        <div className={css.image_div}>
+          <div className={css.inner_img} style={{ backgroundImage: `url(${props.post.image})` }}></div>
+        </div>
+      </Link>
     </div>
   );
 }

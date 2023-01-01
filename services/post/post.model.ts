@@ -9,6 +9,11 @@ export class Post {
   content?: string;
   thumbnail?: string;
   source?: string;
+  sourceData?: {
+    name: string;
+    title: string;
+    logo?: string;
+  };
   link?: string;
   publishDate?: string;
   createDate!: string;
