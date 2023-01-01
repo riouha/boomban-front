@@ -15,7 +15,7 @@ export function SidePost(props: { post: IPost }) {
         <div className={css.details}>
           <h6>{props.post.title}</h6>
           <ul className={css.info}>
-            <li>{props.post.author}</li>
+            <li>{props.post.author.title}</li>
             <li>{props.post.date}</li>
           </ul>
         </div>
