@@ -9,6 +9,7 @@ import { SidePost } from '../components/posts/side-post/side-post';
 import { MiddleBanner } from '../components/middle-banner/middle-banner';
 import { Post } from '../services/post/post.model';
 import { postService } from '../services/post/post.service';
+import { Footer } from '../components/footer/footer';
 
 const NEWS = [
   {
@@ -175,6 +176,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer />
       <style jsx>
         {`
           .lastnews {

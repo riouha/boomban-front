@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { BsShare, BsThreeDots } from 'react-icons/bs';
 import { FaRegEye, FaHeart, FaBookmark, FaRegBookmark, FaRegHeart } from 'react-icons/fa';
@@ -10,13 +11,19 @@ export function PostRow(props: { post: IPost; style?: React.CSSProperties }) {
       <div className={css.post}>
         <Link href={props.post.link || `/post/${props.post.slug}`} target={props.post.link ? '_blank' : undefined}>
           <div className={css.picture}>
-            <img src={props.post.image} alt='' />
+            {props.post.image && <Image src={props.post.image} alt='' width={260} height={150} />}
           </div>
         </Link>
         <div className={css.info}>
           <ul className={css.info_top_list}>
             <li>
-              <img src={props.post.author.avatar || 'images/woman.png'} alt='author' className={css.author} />
+              <Image
+                src={props.post.author.avatar || '/images/woman.png'}
+                alt='author'
+                width={30}
+                height={30}
+                className={css.author}
+              />
               <span>{props.post.author.title}</span>
             </li>
             <li>{props.post.category}</li>

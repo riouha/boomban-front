@@ -12,7 +12,7 @@ export function BoombanCard() {
       </p>
       <div className={css.details}>
         <span>بوم‌بان چه میکند، ببینید</span>
-        <button className='appbtn'>
+        <button className='roundbtn'>
           <FaVideo color='#FFF' />
         </button>
       </div>

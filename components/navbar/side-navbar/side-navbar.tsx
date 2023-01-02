@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { BsXLg } from 'react-icons/bs';
 import { Backdrop } from '../../backdrop/backdrop';
 
@@ -11,7 +12,7 @@ export function SideNavbar(props: { show: boolean; setShow: (show: boolean) => v
             <BsXLg size={22} color='#8F9BAD' onClick={() => props.setShow(false)} />
           </span>
           <div className='brand'>
-            <img src='images/logo2.png' alt='logo' width={60} />
+            <Image src='/images/logo2.png' alt='logo' width={60} height={52} />
             <span>بوم‌بان</span>
           </div>
           <nav>

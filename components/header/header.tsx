@@ -1,7 +1,9 @@
-import css from './header.module.css';
-import { FaBars, FaInstagram, FaSearch } from 'react-icons/fa';
-import { SearchBox } from '../serach-box/search-box';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import css from './header.module.css';
+import { FaBars, FaSearch } from 'react-icons/fa';
+import { SearchBox } from '../serach-box/search-box';
+import logo from '../../public/images/logo.png';
 
 export function Header(props: { handleOpenSideMenu: (show: boolean) => void }) {
   const [fix, setFix] = useState(false);
@@ -28,7 +30,7 @@ export function Header(props: { handleOpenSideMenu: (show: boolean) => void }) {
   return (
     <header className={getHeaderClasses()}>
       <div className={css.brand}>
-        <img src='images/logo.png' alt='logo' width={50} />
+        <Image src={logo} alt='logo' width={50} height={44} />
         <span>بوم‌بان</span>
       </div>
       <nav className={css.desktop}>

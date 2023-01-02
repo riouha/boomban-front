@@ -1,8 +1,10 @@
+import Image from 'next/image';
+
 export function MiddleBanner() {
   return (
     <>
       <div className='banner'>
-        <img src='images/inspection2.png' width={180} alt='' />
+        <Image src='/images/inspection2.png' width={180} height={155} alt='' />
         <h6>اینجا میتونه شعار بوم بان قرار بگیره یا میتونه فرم عضویت باشه</h6>
         <button>درخواست ارزیابی</button>
       </div>

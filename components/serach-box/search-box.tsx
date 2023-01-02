@@ -6,7 +6,7 @@ export function SearchBox(props: { className?: string }) {
     <>
       <div className={props.className ? [css.box, props.className].join(' ') : css.box}>
         <input type='text' placeholder='جستجو کنید...' className={css.input} />
-        <button className='appbtn'>
+        <button className='roundbtn'>
           <FaSearch color='#FFF' />
         </button>
       </div>

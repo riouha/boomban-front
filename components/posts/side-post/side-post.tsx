@@ -1,5 +1,6 @@
 import css from './side-post.module.css';
 import { IPost } from '../interfaces';
+import Image from 'next/image';
 
 export function SidePost(props: { post: IPost }) {
   return (
@@ -7,9 +8,7 @@ export function SidePost(props: { post: IPost }) {
       <div className={css.sidepost}>
         <div className={css.circleimg}>
           <div className={css.inner}>
-            <a>
-              <img src={props.post.image} alt='' />
-            </a>
+            <a>{props.post.image && <Image src={props.post.image} alt='' width={64} height={64} />}</a>
           </div>
         </div>
         <div className={css.details}>
