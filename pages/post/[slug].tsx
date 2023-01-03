@@ -4,7 +4,7 @@ import { Header } from '../../components/header/header';
 import { SideNavbar } from '../../components/navbar/side-navbar/side-navbar';
 import { LargeOverlayedPost } from '../../components/posts/large-overlayed/large-overlayed-post';
 
-export default function Home() {
+export default function Post() {
   const [showSideMenu, SetShowSideMenu] = useState(false);
   return (
     <>
