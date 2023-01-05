@@ -1,10 +1,15 @@
-import dynamic from 'next/dynamic';
 import { ComponentType, useMemo, useRef, useState, useEffect } from 'react';
-import { postService } from '../../services/post/post.service';
+import dynamic from 'next/dynamic';
+import { fileService } from '../../services/file/file.service';
+import { toast, ToastContainer } from 'react-toastify';
 
-const ReactQuill: ComponentType<any> = dynamic(
+const ReactQuill: any = dynamic(
   async () => {
     const { default: RQ } = await import('react-quill');
+    //@ts-ignore
+    // const { ImageResize } = await import('quill-image-resize-module-react');
+    // RQ.Quill.register('modules/ImageResize', ImageResize);
+    // Quill.import('parchment');
     //@ts-ignore
     return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
   },
@@ -31,16 +36,16 @@ export function EditableQuill(props: { rtl?: boolean; setValue?: Function }) {
 
     input.onchange = async () => {
       const file = input.files![0];
-      if (/^image\//.test(file.type)) {
-        console.log(file);
-        const formData = new FormData();
-        formData.append('image', file);
-        const res = await postService.upload(formData);
-        const url = res.data?.url;
-        editor.insertEmbed(editor.getSelection(), 'image', url);
-      } else {
-        console.log('You could only upload images.');
-      }
+      if (!/^image\//.test(file.type)) return toast.error('invalid file');
+      console.log(file);
+      const formData = new FormData();
+      formData.append('file', file);
+      const result = await fileService.uploadFormDate(formData);
+      console.log(result);
+
+      if (!result.data) return toast.error(result.message);
+      const url = fileService.getImageUrl(result.data?.path);
+      editor.insertEmbed(editor.getSelection(), 'image', url);
     };
   };
   const modules = useMemo(
@@ -99,14 +104,36 @@ export function EditableQuill(props: { rtl?: boolean; setValue?: Function }) {
           image: imageHandler,
         },
       },
+      // imageResize: {
+      //   displayStyles: {
+      //     backgroundColor: 'black',
+      //     border: 'none',
+      //     color: 'white',
+      //   },
+      //   modules: ['Resize', 'DisplaySize', 'Toolbar'],
+      // },
     }),
     []
   );
 
   return (
-    <div style={{ direction: 'ltr' }}>
-      <ReactQuill theme='snow' forwardedRef={quillRef} modules={modules} onChange={props.setValue} />
-    </div>
+    <>
+      <div style={{ direction: 'ltr' }}>
+        <ReactQuill theme='snow' forwardedRef={quillRef} modules={modules} onChange={props.setValue} />
+      </div>
+      <ToastContainer
+        position='top-left'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme='light'
+      />
+    </>
   );
 }
 

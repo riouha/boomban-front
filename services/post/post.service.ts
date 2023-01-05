@@ -2,43 +2,10 @@ import { axiosInstance } from '../../api/axios.instance';
 import { SearchFilters } from '../../utils/base-classes/search-filters';
 import { IApiResponse } from '../../utils/interfaces/api-response';
 import { Post, CreatePostData } from './post.model';
-import { IPostService } from './post.service.interface';
+import { IPostService } from './post.interface';
 import { SearchResult } from '../../utils/types/search-result.type';
 
 class PostService implements IPostService {
-  async upload(data: FormData): Promise<IApiResponse<{ url: string }>> {
-    try {
-      const result = await axiosInstance.post('/file/image', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      return {
-        data: { url: 'http://localhost:3400/file/' + result.data.filename },
-      };
-    } catch (err: any) {
-      return {
-        error: err.response ? err.response.status : 500,
-        message: err.message,
-      };
-    }
-  }
-  async upload2(file: Blob): Promise<IApiResponse<{ url: string }>> {
-    try {
-      const data = new FormData();
-      data.append('files', file);
-
-      const result = await axiosInstance.post('/file/image', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      return {
-        data: { url: 'http://localhost:3400/file/' + result.data.filename },
-      };
-    } catch (err: any) {
-      return {
-        error: err.response ? err.response.status : 500,
-        message: err.message,
-      };
-    }
-  }
   async getPosts(): Promise<IApiResponse<{ posts: Post[] }>> {
     try {
       const result = await axiosInstance.get('/post');
