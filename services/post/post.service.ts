@@ -1,4 +1,4 @@
-import { axiosInstance } from '../../api/axios.instance';
+import { axiosInstance } from '../../config/axios.instance';
 import { SearchFilters } from '../../utils/base-classes/search-filters';
 import { IApiResponse } from '../../utils/interfaces/api-response';
 import { Post, CreatePostData } from './post.model';

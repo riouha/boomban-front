@@ -1,4 +1,5 @@
-import { axiosInstance, BaseURL } from '../../api/axios.instance';
+import { appConfig } from '../../config/app-config';
+import { axiosInstance } from '../../config/axios.instance';
 import { IApiResponse } from '../../utils/interfaces/api-response';
 import { IFileService } from './file.interface';
 import { File } from './file.model';
@@ -39,7 +40,7 @@ class FileService implements IFileService {
   }
 
   getImageUrl(path: string) {
-    return `${BaseURL}/file/${path}`;
+    return `${appConfig.apiURL}/file/${path}`;
   }
 }
 
