@@ -4,6 +4,8 @@ const nextConfig = {
   swcMinify: true,
   images: {
     remotePatterns: [
+      { protocol: 'http', hostname: '127.0.0.1' },
+      { protocol: 'http', hostname: '87.107.146.188' },
       { protocol: 'https', hostname: 'media.fardayeeghtesad.com' },
       { protocol: 'https', hostname: 'www.fardayeeghtesad.com' },
       { protocol: 'https', hostname: 'static3.eghtesadonline.com' },

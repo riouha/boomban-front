@@ -6,6 +6,8 @@ import { IPost } from '../interfaces';
 import css from './post-row.module.css';
 
 export function PostRow(props: { post: IPost; style?: React.CSSProperties }) {
+  console.log(props.post);
+
   return (
     <div className={css.block} style={props.style}>
       <div className={css.post}>
@@ -18,7 +20,7 @@ export function PostRow(props: { post: IPost; style?: React.CSSProperties }) {
           <ul className={css.info_top_list}>
             <li>
               <Image
-                src={props.post.author.avatar || '/images/woman.png'}
+                src={props.post.link ? props.post.author.avatar! : '/images/woman.png'}
                 alt='author'
                 width={30}
                 height={30}

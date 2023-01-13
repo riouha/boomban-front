@@ -10,6 +10,7 @@ import { MiddleBanner } from '../components/middle-banner/middle-banner';
 import { Post } from '../services/post/post.model';
 import { postService } from '../services/post/post.service';
 import { Footer } from '../components/footer/footer';
+import { fileService } from '../services/file/file.service';
 
 const NEWS = [
   {
@@ -140,11 +141,11 @@ export default function Home() {
                         avatar: post.sourceData.logo,
                       }
                     : {
-                        id: post.id,
-                        title: post.title,
+                        id: post.createUser!.id,
+                        title: post.createUser!.fullname,
                         avatar: post.thumbnail,
                       },
-                  image: post.thumbnail,
+                  image: post.link ? post.thumbnail : fileService.getImageUrl(post.thumbnail!),
                   link: post.link,
                 }}
                 style={{ marginBottom: '30px' }}

@@ -1,13 +1,42 @@
 import { EditableQuill, ReadonlyQuill } from './quill';
 import css from './post-editor.module.css';
 import { Modal } from '../modal/modal';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Backdrop } from '../backdrop/backdrop';
+import { postService } from '../../services/post/post.service';
+import { fileService } from '../../services/file/file.service';
 
 export function PostEditor() {
+  const [thumbnail, setThumbnail] = useState<File>();
+  const [thumnailUrl, setThumbnailUrl] = useState<string>();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState();
   const [showPreview, setShowPreview] = useState(false);
+
+  const handleSaveDraft = async () => {
+    console.log(content);
+    const result = await postService.addPost({
+      title,
+      content,
+      thumbnail: thumnailUrl,
+      status: 'Published',
+    });
+    console.log(result);
+  };
+
+  const handleChooseThumbnail = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.length) {
+      const file = e.target.files[0];
+      setThumbnail(file);
+    }
+  };
+
+  const handleUploadThumbnail = async () => {
+    if (!thumbnail) return;
+    const result = await fileService.uploadImage(thumbnail);
+    if (result.error) console.log(result);
+    setThumbnailUrl(result.data?.filepath);
+  };
 
   return (
     <>
@@ -22,13 +51,13 @@ export function PostEditor() {
               value={title}
               onChange={(e: any) => setTitle(e.target.value)}
             />
-            <EditableQuill setValue={setContent} />
+            <EditableQuill setValue={setContent} rtl />
           </div>
           <div className={css.settings}>
             <button className='appbtn' style={{ borderRadius: '5px', marginLeft: '10px' }}>
               ذخیره و انتشار
             </button>
-            <button className='appbtn' style={{ borderRadius: '5px', marginLeft: '10px' }}>
+            <button className='appbtn' style={{ borderRadius: '5px', marginLeft: '10px' }} onClick={handleSaveDraft}>
               ذخیره پیشنویس
             </button>
             <button
@@ -38,6 +67,16 @@ export function PostEditor() {
             >
               پیشنمایش
             </button>
+            <br />
+            <br />
+            <br />
+            <input type='file' onChange={handleChooseThumbnail} />
+            {thumbnail && (
+              <>
+                <img src={URL.createObjectURL(thumbnail)} alt='' width={100} />
+                <button onClick={handleUploadThumbnail}>save thumbnail mage</button>
+              </>
+            )}
           </div>
         </div>
       </div>

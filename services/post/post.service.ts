@@ -49,7 +49,7 @@ class PostService implements IPostService {
 
   async addPost(data: CreatePostData): Promise<IApiResponse<Post>> {
     try {
-      const result = await axiosInstance.post('/post', { data });
+      const result = await axiosInstance.post('/post', data);
       return {
         data: result.data as Post,
       };

@@ -44,7 +44,7 @@ export function EditableQuill(props: { rtl?: boolean; setValue?: Function }) {
       console.log(result);
 
       if (!result.data) return toast.error(result.message);
-      const url = fileService.getImageUrl(result.data?.path);
+      const url = fileService.getImageUrl(result.data?.filepath);
       editor.insertEmbed(editor.getSelection(), 'image', url);
     };
   };
