@@ -40,6 +40,11 @@ class FileService implements IFileService {
   }
 
   getImageUrl(path: string) {
+    console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+
+    console.log(appConfig.apiURL, process.env.NEXT_PUBLIC_API_URL);
+    console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
+
     return `${appConfig.apiURL}/file/${path}`;
   }
 
