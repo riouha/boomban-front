@@ -42,16 +42,15 @@ export const EditableSuneditor = (props: { refEditor: MutableRefObject<any> }) =
   return (
     <>
       <SunEditor
-        setDefaultStyle='font-family: Vazirmatn;'
+        setDefaultStyle='font-family:Vazirmatn; height:auto'
         autoFocus={true}
         onImageUploadBefore={onImageUploadBefore}
         // onImageUpload={handleImageUpload}
         getSunEditorInstance={getSunEditorInstance}
         setOptions={{
           // resizingBar: false,
-          resizeEnable: true,
+          // resizeEnable: true,
           rtl: true,
-
           buttonList: [
             [
               'font',
@@ -117,8 +116,7 @@ export const ReadonlySuneditor = (props: { value: string }) => {
           autoFocus={false}
           setOptions={{
             resizingBar: false,
-            showPathLabel: false,
-
+            // showPathLabel: false,
             rtl: true,
           }}
           defaultValue={props.value}
