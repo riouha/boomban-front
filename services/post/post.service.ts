@@ -1,12 +1,12 @@
 import { axiosInstance } from '../../config/axios.instance';
 import { SearchFilters } from '../../utils/base-classes/search-filters';
 import { IApiResponse } from '../../utils/interfaces/api-response';
-import { Post, CreatePostData } from './post.model';
+import { PostModel, CreatePostData } from './post.model';
 import { IPostService } from './post.interface';
 import { SearchResult } from '../../utils/types/search-result.type';
 
 class PostService implements IPostService {
-  async getPosts(): Promise<IApiResponse<{ posts: Post[] }>> {
+  async getPosts(): Promise<IApiResponse<{ posts: PostModel[] }>> {
     try {
       const result = await axiosInstance.get('/post');
       return {
@@ -19,7 +19,7 @@ class PostService implements IPostService {
       };
     }
   }
-  async searchPosts(filters: SearchFilters): Promise<IApiResponse<SearchResult<{ posts: Post[] }>>> {
+  async searchPosts(filters: SearchFilters): Promise<IApiResponse<SearchResult<{ posts: PostModel[] }>>> {
     try {
       const result = await axiosInstance.get('/post');
       return {
@@ -33,11 +33,11 @@ class PostService implements IPostService {
     }
   }
 
-  async getPost(id: number): Promise<IApiResponse<Post>> {
+  async getPostBySlug(slug: string): Promise<IApiResponse<PostModel>> {
     try {
-      const result = await axiosInstance.get(`/post/${id}`);
+      const result = await axiosInstance.get(`/post/${slug}`);
       return {
-        data: result.data as Post,
+        data: result.data as PostModel,
       };
     } catch (err: any) {
       return {
@@ -47,11 +47,25 @@ class PostService implements IPostService {
     }
   }
 
-  async addPost(data: CreatePostData): Promise<IApiResponse<Post>> {
+  async getPost(id: number): Promise<IApiResponse<PostModel>> {
+    try {
+      const result = await axiosInstance.get(`/post/${id}`);
+      return {
+        data: result.data as PostModel,
+      };
+    } catch (err: any) {
+      return {
+        error: err.response ? err.response.status : 500,
+        message: err.message,
+      };
+    }
+  }
+
+  async addPost(data: CreatePostData): Promise<IApiResponse<PostModel>> {
     try {
       const result = await axiosInstance.post('/post', data);
       return {
-        data: result.data as Post,
+        data: result.data as PostModel,
       };
     } catch (err: any) {
       return {

@@ -7,7 +7,7 @@ import { SideNavbar } from '../components/navbar/side-navbar/side-navbar';
 import { useState, useEffect } from 'react';
 import { SidePost } from '../components/posts/side-post/side-post';
 import { MiddleBanner } from '../components/middle-banner/middle-banner';
-import { Post } from '../services/post/post.model';
+import { PostModel } from '../services/post/post.model';
 import { postService } from '../services/post/post.service';
 import { Footer } from '../components/footer/footer';
 import { fileService } from '../services/file/file.service';
@@ -84,8 +84,7 @@ const NEWS = [
 
 export default function Home() {
   const [showSideMenu, SetShowSideMenu] = useState(false);
-  const [posts, setPosts] = useState<Post[]>([]);
-
+  const [posts, setPosts] = useState<PostModel[]>([]);
   useEffect(() => {
     postService.getPosts().then((data) => setPosts(data.data?.posts ?? []));
   }, []);

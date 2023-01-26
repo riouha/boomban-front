@@ -1,12 +1,13 @@
 import { Omit } from '../../utils/types/omit.type';
 
-export class Post {
+export class PostModel {
   id!: number;
   slug!: string;
   title!: string;
   type!: string;
   status!: string;
   content?: string;
+  htmlContent?: string;
   thumbnail?: string;
   source?: string;
   sourceData?: {

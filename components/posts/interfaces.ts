@@ -11,5 +11,6 @@ export interface IPost {
   date: string;
   category: string;
   content?: string;
+  htmlContent?: string;
   link?: string;
 }

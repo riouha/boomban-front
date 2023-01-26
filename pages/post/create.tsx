@@ -1,11 +1,6 @@
-import dynamic from 'next/dynamic';
-import { ComponentType, createRef, forwardRef, useMemo, useRef, useState } from 'react';
-import { BoombanCard } from '../../components/boomban-card/boomban-card';
-import { Header } from '../../components/header/header';
-import { FixedSideNavbar, SideNavbar } from '../../components/navbar/side-navbar/side-navbar';
-import { LargeOverlayedPost } from '../../components/posts/large-overlayed/large-overlayed-post';
+import { useState } from 'react';
+import { FixedSideNavbar } from '../../components/navbar/side-navbar/side-navbar';
 import { PostEditor } from '../../components/post-editor/post-editor';
-import { EditableQuill, ReadonlyQuill } from '../../components/post-editor/quill';
 
 export default function CreatePost() {
   const [showSideMenu, SetShowSideMenu] = useState(false);

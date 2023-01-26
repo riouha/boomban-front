@@ -1,41 +1,48 @@
-import { EditableQuill, ReadonlyQuill } from './quill';
-import css from './post-editor.module.css';
-import { Modal } from '../modal/modal';
-import { ChangeEvent, useState } from 'react';
-import { Backdrop } from '../backdrop/backdrop';
-import { postService } from '../../services/post/post.service';
+import { useRef, useState } from 'react';
 import { fileService } from '../../services/file/file.service';
+import { postService } from '../../services/post/post.service';
+import { EditableSuneditor } from './suneditor';
+import { Modal } from '../modal/modal';
+import { ImageGallery } from '../image-gallery/image-gallery';
+import { GalleryFile } from '../../services/file/file.model';
+import { Backdrop } from '../backdrop/backdrop';
+import css from './post-editor.module.css';
+import 'suneditor/dist/css/suneditor.min.css';
+//======================================================================================
 
 export function PostEditor() {
-  const [thumbnail, setThumbnail] = useState<File>();
-  const [thumnailUrl, setThumbnailUrl] = useState<string>();
+  const refEditor = useRef<any>();
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState();
-  const [showPreview, setShowPreview] = useState(false);
+  const [thumbnail, setThumbnail] = useState<string>();
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
 
   const handleSaveDraft = async () => {
-    console.log(content);
+    if (!refEditor.current || !thumbnail || !title) return;
+    const html = refEditor.current.getContents();
     const result = await postService.addPost({
       title,
-      content,
-      thumbnail: thumnailUrl,
-      status: 'Published',
+      content: html.replace(/<[^>]+>/g, ' '),
+      htmlContent: encodeURI(html),
+      thumbnail,
+      status: 'Draft',
     });
     console.log(result);
   };
+  const handleSavePublished = async () => {
+    console.log(refEditor.current, thumbnail, title);
 
-  const handleChooseThumbnail = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.length) {
-      const file = e.target.files[0];
-      setThumbnail(file);
-    }
-  };
+    if (!refEditor.current || !thumbnail || !title) return;
+    const html = refEditor.current.getContents();
+    console.log('html', html);
 
-  const handleUploadThumbnail = async () => {
-    if (!thumbnail) return;
-    const result = await fileService.uploadImage(thumbnail);
-    if (result.error) console.log(result);
-    setThumbnailUrl(result.data?.filepath);
+    const result = await postService.addPost({
+      title,
+      content: html.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ''),
+      htmlContent: encodeURI(html),
+      thumbnail,
+      status: 'Published',
+    });
+    console.log(result);
   };
 
   return (
@@ -51,40 +58,36 @@ export function PostEditor() {
               value={title}
               onChange={(e: any) => setTitle(e.target.value)}
             />
-            <EditableQuill setValue={setContent} rtl />
+            <EditableSuneditor refEditor={refEditor} />
           </div>
           <div className={css.settings}>
-            <button className='appbtn' style={{ borderRadius: '5px', marginLeft: '10px' }}>
+            <div>
+              <button onClick={() => setShowGalleryModal(true)}>select thumbnail</button>
+              <br />
+              {thumbnail && <img src={fileService.getImageUrl(thumbnail)} width={100} alt='' />}
+            </div>
+            <button
+              className='appbtn'
+              style={{ borderRadius: '5px', marginLeft: '10px' }}
+              onClick={handleSavePublished}
+            >
               ذخیره و انتشار
             </button>
             <button className='appbtn' style={{ borderRadius: '5px', marginLeft: '10px' }} onClick={handleSaveDraft}>
               ذخیره پیشنویس
             </button>
-            <button
-              className='appbtn'
-              style={{ borderRadius: '5px', marginLeft: '10px' }}
-              onClick={() => setShowPreview(true)}
-            >
-              پیشنمایش
-            </button>
-            <br />
-            <br />
-            <br />
-            <input type='file' onChange={handleChooseThumbnail} />
-            {thumbnail && (
-              <>
-                <img src={URL.createObjectURL(thumbnail)} alt='' width={100} />
-                <button onClick={handleUploadThumbnail}>save thumbnail mage</button>
-              </>
-            )}
           </div>
         </div>
       </div>
-      <Modal show={showPreview}>
-        <h1>{title}</h1>
-        <ReadonlyQuill value={content} />
+      <Modal show={showGalleryModal}>
+        <ImageGallery
+          onImageSelect={(image: GalleryFile) => {
+            setThumbnail(image.filepath);
+            setShowGalleryModal(false);
+          }}
+        />
       </Modal>
-      <Backdrop show={showPreview} setShow={setShowPreview} />
+      <Backdrop show={showGalleryModal} setShow={setShowGalleryModal} />
     </>
   );
 }

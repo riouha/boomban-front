@@ -52,3 +52,7 @@
 .appbtn:hover {
   background-position: bottom center;
 }
+
+#readonly-suneditor>* .sun-editor-editable[contenteditable=true] .se-component {
+  outline: none !important;
+}

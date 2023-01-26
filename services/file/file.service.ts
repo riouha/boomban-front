@@ -56,6 +56,10 @@ class FileService implements IFileService {
       };
     }
   }
+
+  getGalleryUrl() {
+    return `${appConfig.apiURL}/file/gallery`;
+  }
 }
 
 export const fileService = new FileService();
