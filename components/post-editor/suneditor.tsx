@@ -48,7 +48,8 @@ export const EditableSuneditor = (props: { refEditor: MutableRefObject<any> }) =
         // onImageUpload={handleImageUpload}
         getSunEditorInstance={getSunEditorInstance}
         setOptions={{
-          resizingBar: false,
+          // resizingBar: false,
+          resizeEnable: true,
           rtl: true,
 
           buttonList: [
